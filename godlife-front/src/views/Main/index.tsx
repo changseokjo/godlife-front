@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { ChangeEvent, KeyboardEvent, useState, useEffect } from 'react'
 import StudyDefaultImage from '../../assets/study-default-icon.png'
 import { Scrollbars } from 'react-custom-scrollbars-2';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
@@ -18,6 +18,8 @@ import ProgressBar from '../../components/ProgressBar';
 import MyToDoListItem from '../../components/MyToDoListItem';
 import { hover } from '@testing-library/user-event/dist/hover';
 import InputBox from '../../components/MyToDoListInputBox';
+import MyToDoListInputBox from '../../components/MyToDoListInputBox';
+import SearchInputBox from '../../components/SearchInputBox';
 
 //        component: 메인 페이지        //
 export default function Main() {
@@ -301,7 +303,7 @@ export default function Main() {
                   </div>
                 </div>
 
-                <InputBox type={'text'} placeholder='TO DO LIST 입력중입니다....' value={inputMyToDoList} setValue={setInputMyToDoList} />
+                <MyToDoListInputBox type={'text'} placeholder='TO DO LIST 입력중입니다....' value={inputMyToDoList} setValue={setInputMyToDoList} />
 
                 <div className='main-top-down-todolist-detail-box'>
                     <Scrollbars
@@ -352,18 +354,39 @@ export default function Main() {
     const [selectedStudyCategory, setSelectedStudyCategory] = useState<string>('전체');
     //        state: 스터디 공개여부 선택 상태        //
     const [selectedStudyPublicCheckCategory, setSelectedStudyPublicCheckCategory] = useState<string>('전체');
+    //          state: 검색 값 상태         //
+    const [searchValue, setSearchValue] = useState<string>('');
 
-    //        event handler: 스터디 카테고리 버튼 클릭 이벤트       //
+    //            event handler: 검색 값 변경 이벤트 처리         //
+    const onInputValueChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+      const searchValue = event.target.value;
+      setSearchValue(searchValue);
+    };
+
+    //           event handler: 검색 인풋 Enter key down 이벤트 처리         //
+    const onSearchEnterKeyDownHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+      if (event.key !== 'Enter') return;
+      if (!searchValue) return;
+      alert('검색완료');
+    }
+
+    //           event handler: 검색 버튼 클릭 이벤트 처리         //
+    const onSearchButtonClickHandler = () => {
+      if (!searchValue) return;
+      alert('검색완료');
+    }
+
+    //        event handler: 스터디 카테고리 버튼 클릭 이벤트 처리       //
     const onStudyCategoryButtonClickHandler = (category: string) => {
       setSelectedStudyCategory(category);
     };
 
-    //        event handler: 스터디 공개여부 카테고리 버튼 클릭 이벤트        //
+    //        event handler: 스터디 공개여부 카테고리 버튼 클릭 이벤트 처리        //
     const onStudyPublicCheckCategoryButtonClickHandler = (category: string) => {
       setSelectedStudyPublicCheckCategory(category);
     }
 
-    //        event handler: 더보기 버튼 클릭 이벤트       //
+    //        event handler: 더보기 버튼 클릭 이벤트 처리       //
     const onMoreDetailButtonClickHandler = () => {
       alert('더보기 버튼 처리');
     }
@@ -377,12 +400,8 @@ export default function Main() {
 
             <div className='main-bottom-box-studyroom-search-box'>
               <div className='main-bottom-box-studyroom-total'>{'총 120개 스터디'}</div>
-              <div className='main-bottom-box-studyroom-search-input-box'>
-                <div className='main-bottom-box-studyroom-search-input'>{'검색어를 입력해 주세요'}</div>
-                <div className='icon-button'>
-                  <div className='search-icon'></div>
-                </div>
-              </div>
+              <SearchInputBox type={'text'} placeholder='검색어를 입력해 주세요' value={searchValue} 
+              setValue={setSearchValue} icon={'search-icon'} onChange={onInputValueChangeHandler} onKeyDown={onSearchEnterKeyDownHandler} onButtonClick={onSearchButtonClickHandler}/>
             </div>
 
             <div className='main-bottom-box-studyroom-category-box'>
@@ -409,8 +428,6 @@ export default function Main() {
                 onClick={() => onStudyPublicCheckCategoryButtonClickHandler('공개')}>{'공개'}</div>
               <div className={selectedStudyPublicCheckCategory === '비공개' ? 'main-bottom-box-studyroom-public-check-category-button-selected' : 'main-bottom-box-studyroom-public-check-category-button'}
                 onClick={() => onStudyPublicCheckCategoryButtonClickHandler('비공개')}>{'비공개'}</div>
-              {/* <div className='main-bottom-box-studyroom-public-check-category-button'>{'공개'}</div>
-              <div className='main-bottom-box-studyroom-public-check-category-button'>{'비공개'}</div> */}
             </div>
 
             <div className='main-bottom-box-studyroom'>

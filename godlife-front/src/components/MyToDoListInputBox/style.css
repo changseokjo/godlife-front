@@ -1,10 +1,10 @@
-.inputbox {
+.my-todolist-inputbox {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.inputbox-container {
+.my-todolist-inputbox-container {
     height: 31px;
     width: 100%;
 
@@ -16,12 +16,12 @@
     box-shadow: 0 0 0 2px rgba(24, 160, 251, 0.5) inset;
 }
 
-.inputbox-container:hover {
+.my-todolist-inputbox-container:hover {
     background-color: rgba(255,255,255,1);;
     box-shadow: 0 0 0 2px rgba(24,160,251,1) inset;
 }
 
-.input {
+.my-todolist-input {
     border: none;
     background: none;
     outline: none;
