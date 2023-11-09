@@ -103,12 +103,12 @@ export default function Main() {
       alert('스터디 시작 하기 처리');
     }
 
-    //        event handler: 나의 투두리스트 추가하기       //
+    //        event handler: 나의 투두리스트 추가하기 버튼 클릭 이벤트 처리       //
     const onMyToDoListAddClickHandler = () => {
       alert('투두리스트 추가하기 처리');
     }
 
-    //        event handler: 나의 투두리스트 삭제하기       //
+    //        event handler: 나의 투두리스트 삭제하기 버튼 클릭 이벤트 처리       //
     const onMyToDoListDeleteClickHandler = () => {
       alert('투두리스트 삭제하기 처리');
     }
@@ -348,6 +348,20 @@ export default function Main() {
   //        component: 메인 하단 컴포넌트       //
   const MainBottom = () => {
 
+    //        state: 스터디 카테고리 선택 상태        //
+    const [selectedStudyCategory, setSelectedStudyCategory] = useState<string>('전체');
+
+    //        event handler: 스터디 카테고리 버튼 클릭 이벤트       //
+    const onStudyCategoryButtonClickHandler = (category: string) => {
+      setSelectedStudyCategory(category);
+    };
+
+
+    //        event handler: 더보기 버튼 클릭 이벤트       //
+    const onMoreDetailButtonClickHandler = () => {
+      alert('더보기 버튼 처리');
+    }
+
     //        render: 메인 하단 컴포넌트 렌더링       //
     return (
       <div id='main-bottom-wrapper'>
@@ -366,113 +380,68 @@ export default function Main() {
             </div>
 
             <div className='main-bottom-box-studyroom-category-box'>
-              <div className='main-bottom-box-studyroom-category-activation-button'>{'전체'}</div>
-              <div className='main-bottom-box-studyroom-category-deactivation-button'>{'자격증'}</div>
-              <div className='main-bottom-box-studyroom-category-deactivation-button'>{'학교'}</div>
-              <div className='main-bottom-box-studyroom-category-deactivation-button'>{'취업'}</div>
-              <div className='main-bottom-box-studyroom-category-deactivation-button'>{'회화'}</div>
-              <div className='main-bottom-box-studyroom-category-deactivation-button'>{'기타'}</div>
+              <div className='main-bottom-box-studyroom-category-title'>{'스터디 카테고리'}</div>
+              <div className={selectedStudyCategory === '전체' ? 'main-bottom-box-studyroom-category-button-selected' : 'main-bottom-box-studyroom-category-button'} 
+                onClick={() => onStudyCategoryButtonClickHandler('전체')}>{'전체'}</div>
+              <div className={selectedStudyCategory === '자격증' ? 'main-bottom-box-studyroom-category-button-selected' : 'main-bottom-box-studyroom-category-button'} 
+                onClick={() => onStudyCategoryButtonClickHandler('자격증')}>{'자격증'}</div>
+              <div className={selectedStudyCategory === '학교' ? 'main-bottom-box-studyroom-category-button-selected' : 'main-bottom-box-studyroom-category-button'} 
+                onClick={() => onStudyCategoryButtonClickHandler('학교')}>{'학교'}</div>
+              <div className={selectedStudyCategory === '취업' ? 'main-bottom-box-studyroom-category-button-selected' : 'main-bottom-box-studyroom-category-button'} 
+                onClick={() => onStudyCategoryButtonClickHandler('취업')}>{'취업'}</div>
+              <div className={selectedStudyCategory === '회화' ? 'main-bottom-box-studyroom-category-button-selected' : 'main-bottom-box-studyroom-category-button'} 
+                onClick={() => onStudyCategoryButtonClickHandler('회화')}>{'회화'}</div>
+              <div className={selectedStudyCategory === '기타' ? 'main-bottom-box-studyroom-category-button-selected' : 'main-bottom-box-studyroom-category-button'} 
+                onClick={() => onStudyCategoryButtonClickHandler('기타')}>{'기타'}</div>
+            </div>
+
+            <div className='main-bottom-box-studyroom-pubilc-check-category-box'>
+              <div className='main-bottom-box-studyroom-public-check-category-title'>{'스터디 공개여부'}</div>
+              <div className='main-bottom-box-studyroom-public-check-category-button'>{'전체'}</div>
+              <div className='main-bottom-box-studyroom-public-check-category-button'>{'공개'}</div>
+              <div className='main-bottom-box-studyroom-public-check-category-button'>{'비공개'}</div>
             </div>
 
             <div className='main-bottom-box-studyroom'>
               <div className='main-bottom-box-studyroom-line'>
-                <div className='main-middle-box-studyroom-data' style={{backgroundImage: `url(${StudyDefaultImage})` }}>
-                  <div className='main-middle-box-studyroom-deadline-time'>{'스터디 마감 시간 : 2023년 09월 15일'}</div>
-                  <div className='main-middle-box-studyroom-participation-number'>{'스터디 참여자 수 00 / 00명'}</div>
-                  <div className='main-middle-box-studyroom-title'>{'스터디 이름'}</div>
+                <div className='main-bottom-box-studyroom-data' style={{backgroundImage: `url(${StudyDefaultImage})` }}>
+                  <div className='main-bottom-box-studyroom-deadline-time'>{'스터디 마감 시간 : 2023년 09월 15일'}</div>
+                  <div className='main-bottom-box-studyroom-public-check'>{'공개'}</div>
+                  <div className='main-bottom-box-studyroom-participation-number'>{'스터디 참여자 수 00 / 00명'}</div>
+                  <div className='main-bottom-box-studyroom-title'>{'스터디 이름'}</div>
                 </div>
 
-                <div className='main-middle-box-studyroom-data' style={{backgroundImage: `url(${StudyDefaultImage})` }}>
-                  <div className='main-middle-box-studyroom-deadline-time'>{'스터디 마감 시간 : 2023년 09월 15일'}</div>
-                  <div className='main-middle-box-studyroom-participation-number'>{'스터디 참여자 수 00 / 00명'}</div>
-                  <div className='main-middle-box-studyroom-title'>{'스터디 이름'}</div>
+                <div className='main-bottom-box-studyroom-data' style={{backgroundImage: `url(${StudyDefaultImage})` }}>
+                  <div className='main-bottom-box-studyroom-deadline-time'>{'스터디 마감 시간 : 2023년 09월 15일'}</div>
+                  <div className='main-bottom-box-studyroom-public-check'>{'공개'}</div>
+                  <div className='main-bottom-box-studyroom-participation-number'>{'스터디 참여자 수 00 / 00명'}</div>
+                  <div className='main-bottom-box-studyroom-title'>{'스터디 이름'}</div>
                 </div>
 
-                <div className='main-middle-box-studyroom-data' style={{backgroundImage: `url(${StudyDefaultImage})` }}>
-                  <div className='main-middle-box-studyroom-deadline-time'>{'스터디 마감 시간 : 2023년 09월 15일'}</div>
-                  <div className='main-middle-box-studyroom-participation-number'>{'스터디 참여자 수 00 / 00명'}</div>
-                  <div className='main-middle-box-studyroom-title'>{'스터디 이름'}</div>
+                <div className='main-bottom-box-studyroom-data' style={{backgroundImage: `url(${StudyDefaultImage})` }}>
+                  <div className='main-bottom-box-studyroom-deadline-time'>{'스터디 마감 시간 : 2023년 09월 15일'}</div>
+                  <div className='main-bottom-box-studyroom-public-check'>{'공개'}</div>
+                  <div className='main-bottom-box-studyroom-participation-number'>{'스터디 참여자 수 00 / 00명'}</div>
+                  <div className='main-bottom-box-studyroom-title'>{'스터디 이름'}</div>
                 </div>
 
-                <div className='main-middle-box-studyroom-data' style={{backgroundImage: `url(${StudyDefaultImage})` }}>
-                  <div className='main-middle-box-studyroom-deadline-time'>{'스터디 마감 시간 : 2023년 09월 15일'}</div>
-                  <div className='main-middle-box-studyroom-participation-number'>{'스터디 참여자 수 00 / 00명'}</div>
-                  <div className='main-middle-box-studyroom-title'>{'스터디 이름'}</div>
+                <div className='main-bottom-box-studyroom-data' style={{backgroundImage: `url(${StudyDefaultImage})` }}>
+                  <div className='main-bottom-box-studyroom-deadline-time'>{'스터디 마감 시간 : 2023년 09월 15일'}</div>
+                  <div className='main-bottom-box-studyroom-public-check'>{'공개'}</div>
+                  <div className='main-bottom-box-studyroom-participation-number'>{'스터디 참여자 수 00 / 00명'}</div>
+                  <div className='main-bottom-box-studyroom-title'>{'스터디 이름'}</div>
                 </div>
 
-                <div className='main-middle-box-studyroom-data' style={{backgroundImage: `url(${StudyDefaultImage})` }}>
-                  <div className='main-middle-box-studyroom-deadline-time'>{'스터디 마감 시간 : 2023년 09월 15일'}</div>
-                  <div className='main-middle-box-studyroom-participation-number'>{'스터디 참여자 수 00 / 00명'}</div>
-                  <div className='main-middle-box-studyroom-title'>{'스터디 이름'}</div>
-                </div>
-              </div>
-
-              <div className='main-bottom-box-studyroom-line'>
-                <div className='main-middle-box-studyroom-data' style={{backgroundImage: `url(${StudyDefaultImage})` }}>
-                  <div className='main-middle-box-studyroom-deadline-time'>{'스터디 마감 시간 : 2023년 09월 15일'}</div>
-                  <div className='main-middle-box-studyroom-participation-number'>{'스터디 참여자 수 00 / 00명'}</div>
-                  <div className='main-middle-box-studyroom-title'>{'스터디 이름'}</div>
-                </div>
-
-                <div className='main-middle-box-studyroom-data' style={{backgroundImage: `url(${StudyDefaultImage})` }}>
-                  <div className='main-middle-box-studyroom-deadline-time'>{'스터디 마감 시간 : 2023년 09월 15일'}</div>
-                  <div className='main-middle-box-studyroom-participation-number'>{'스터디 참여자 수 00 / 00명'}</div>
-                  <div className='main-middle-box-studyroom-title'>{'스터디 이름'}</div>
-                </div>
-
-                <div className='main-middle-box-studyroom-data' style={{backgroundImage: `url(${StudyDefaultImage})` }}>
-                  <div className='main-middle-box-studyroom-deadline-time'>{'스터디 마감 시간 : 2023년 09월 15일'}</div>
-                  <div className='main-middle-box-studyroom-participation-number'>{'스터디 참여자 수 00 / 00명'}</div>
-                  <div className='main-middle-box-studyroom-title'>{'스터디 이름'}</div>
-                </div>
-
-                <div className='main-middle-box-studyroom-data' style={{backgroundImage: `url(${StudyDefaultImage})` }}>
-                  <div className='main-middle-box-studyroom-deadline-time'>{'스터디 마감 시간 : 2023년 09월 15일'}</div>
-                  <div className='main-middle-box-studyroom-participation-number'>{'스터디 참여자 수 00 / 00명'}</div>
-                  <div className='main-middle-box-studyroom-title'>{'스터디 이름'}</div>
-                </div>
-
-                <div className='main-middle-box-studyroom-data' style={{backgroundImage: `url(${StudyDefaultImage})` }}>
-                  <div className='main-middle-box-studyroom-deadline-time'>{'스터디 마감 시간 : 2023년 09월 15일'}</div>
-                  <div className='main-middle-box-studyroom-participation-number'>{'스터디 참여자 수 00 / 00명'}</div>
-                  <div className='main-middle-box-studyroom-title'>{'스터디 이름'}</div>
-                </div>
-              </div>
-
-              <div className='main-bottom-box-studyroom-line'>
-                <div className='main-middle-box-studyroom-data' style={{backgroundImage: `url(${StudyDefaultImage})` }}>
-                  <div className='main-middle-box-studyroom-deadline-time'>{'스터디 마감 시간 : 2023년 09월 15일'}</div>
-                  <div className='main-middle-box-studyroom-participation-number'>{'스터디 참여자 수 00 / 00명'}</div>
-                  <div className='main-middle-box-studyroom-title'>{'스터디 이름'}</div>
-                </div>
-
-                <div className='main-middle-box-studyroom-data' style={{backgroundImage: `url(${StudyDefaultImage})` }}>
-                  <div className='main-middle-box-studyroom-deadline-time'>{'스터디 마감 시간 : 2023년 09월 15일'}</div>
-                  <div className='main-middle-box-studyroom-participation-number'>{'스터디 참여자 수 00 / 00명'}</div>
-                  <div className='main-middle-box-studyroom-title'>{'스터디 이름'}</div>
-                </div>
-
-                <div className='main-middle-box-studyroom-data' style={{backgroundImage: `url(${StudyDefaultImage})` }}>
-                  <div className='main-middle-box-studyroom-deadline-time'>{'스터디 마감 시간 : 2023년 09월 15일'}</div>
-                  <div className='main-middle-box-studyroom-participation-number'>{'스터디 참여자 수 00 / 00명'}</div>
-                  <div className='main-middle-box-studyroom-title'>{'스터디 이름'}</div>
-                </div>
-
-                <div className='main-middle-box-studyroom-data' style={{backgroundImage: `url(${StudyDefaultImage})` }}>
-                  <div className='main-middle-box-studyroom-deadline-time'>{'스터디 마감 시간 : 2023년 09월 15일'}</div>
-                  <div className='main-middle-box-studyroom-participation-number'>{'스터디 참여자 수 00 / 00명'}</div>
-                  <div className='main-middle-box-studyroom-title'>{'스터디 이름'}</div>
-                </div>
-
-                <div className='main-middle-box-studyroom-data' style={{backgroundImage: `url(${StudyDefaultImage})` }}>
-                  <div className='main-middle-box-studyroom-deadline-time'>{'스터디 마감 시간 : 2023년 09월 15일'}</div>
-                  <div className='main-middle-box-studyroom-participation-number'>{'스터디 참여자 수 00 / 00명'}</div>
-                  <div className='main-middle-box-studyroom-title'>{'스터디 이름'}</div>
+                <div className='main-bottom-box-studyroom-data' style={{backgroundImage: `url(${StudyDefaultImage})` }}>
+                  <div className='main-bottom-box-studyroom-deadline-time'>{'스터디 마감 시간 : 2023년 09월 15일'}</div>
+                  <div className='main-bottom-box-studyroom-public-check'>{'공개'}</div>
+                  <div className='main-bottom-box-studyroom-participation-number'>{'스터디 참여자 수 00 / 00명'}</div>
+                  <div className='main-bottom-box-studyroom-title'>{'스터디 이름'}</div>
                 </div>
               </div>
             </div>
 
-            <div className='main-bottom-box-studyroom-additional-view-button'>{'더보기'}</div>
+            <div className='main-bottom-box-studyroom-more-detail-button' onClick={onMoreDetailButtonClickHandler}>{'더보기'}</div>
 
           </div>
         </div>

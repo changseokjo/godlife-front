@@ -26,6 +26,10 @@
     gap: 10px;
 }
 
+.header-left-box:hover {
+    cursor: pointer;
+}
+ 
 .header-logo-icon-box {
     width: 55px;
     height: 55px;

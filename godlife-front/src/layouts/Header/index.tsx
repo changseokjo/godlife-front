@@ -1,11 +1,19 @@
 import React from 'react'
 import './style.css';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function Header() {
 
   //        state: path name 상태       //
   const { pathname } = useLocation();
+
+  //          function: 네비게이트 함수           //
+  const navigator = useNavigate();
+
+  //          event handler: 로고 클릭 이벤트 처리          //
+  const onLogoClickHandler = () => {
+    navigator('/');
+  }
 
   //        render: 헤더 컴포넌트 렌더링        //
   return (
@@ -15,7 +23,7 @@ export default function Header() {
           <div className='header-logo-icon-box'>
             <div className='logo-icon'></div>
           </div>
-          <div className='header-logo-text'>{'갓생살기'}</div>
+          <div className='header-logo-text' onClick={onLogoClickHandler}>{'갓생살기'}</div>
         </div>
 
         <div className='header-right-box'>
