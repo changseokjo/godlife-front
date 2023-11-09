@@ -1087,6 +1087,10 @@
     border-radius: 10px;
 }
 
+.main-bottom-box-studyroom-category-button-selected:hover {
+    cursor: pointer;
+}
+
 .main-bottom-box-studyroom-category-button {
     width: 98px;
     height: 38px;
@@ -1102,6 +1106,10 @@
     background-color: rgba(255,255,255,1);
     box-shadow: 0 0 0 2px rgba(24,160,251,1) inset;
     border-radius: 10px;
+}
+
+.main-bottom-box-studyroom-category-button:hover {
+    cursor: pointer;
 }
 
 .main-bottom-box-studyroom-pubilc-check-category-box {
@@ -1121,7 +1129,7 @@
     margin-right: 10px;
 }
 
-.main-bottom-box-studyroom-public-check-category-button {
+.main-bottom-box-studyroom-public-check-category-button-selected {
     width: 98px;
     height: 38px;
 
@@ -1136,6 +1144,31 @@
     background-color: rgba(24, 160, 251, 0.7);
     box-shadow: 0 0 0 2px rgba(24,160,251,1) inset;
     border-radius: 10px;
+}
+
+.main-bottom-box-studyroom-public-check-category-button-selected:hover {
+    cursor: pointer;
+}
+
+.main-bottom-box-studyroom-public-check-category-button {
+    width: 98px;
+    height: 38px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 25px;
+    font-weight: 400;
+
+    color: rgba(0,0,0,1);
+    background-color: rgba(255,255,255,1);
+    box-shadow: 0 0 0 2px rgba(24,160,251,1) inset;
+    border-radius: 10px;
+}
+
+.main-bottom-box-studyroom-public-check-category-button:hover {
+    cursor: pointer;
 }
 
 .main-bottom-box-studyroom {

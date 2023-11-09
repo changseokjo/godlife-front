@@ -350,12 +350,18 @@ export default function Main() {
 
     //        state: 스터디 카테고리 선택 상태        //
     const [selectedStudyCategory, setSelectedStudyCategory] = useState<string>('전체');
+    //        state: 스터디 공개여부 선택 상태        //
+    const [selectedStudyPublicCheckCategory, setSelectedStudyPublicCheckCategory] = useState<string>('전체');
 
     //        event handler: 스터디 카테고리 버튼 클릭 이벤트       //
     const onStudyCategoryButtonClickHandler = (category: string) => {
       setSelectedStudyCategory(category);
     };
 
+    //        event handler: 스터디 공개여부 카테고리 버튼 클릭 이벤트        //
+    const onStudyPublicCheckCategoryButtonClickHandler = (category: string) => {
+      setSelectedStudyPublicCheckCategory(category);
+    }
 
     //        event handler: 더보기 버튼 클릭 이벤트       //
     const onMoreDetailButtonClickHandler = () => {
@@ -397,9 +403,14 @@ export default function Main() {
 
             <div className='main-bottom-box-studyroom-pubilc-check-category-box'>
               <div className='main-bottom-box-studyroom-public-check-category-title'>{'스터디 공개여부'}</div>
-              <div className='main-bottom-box-studyroom-public-check-category-button'>{'전체'}</div>
-              <div className='main-bottom-box-studyroom-public-check-category-button'>{'공개'}</div>
-              <div className='main-bottom-box-studyroom-public-check-category-button'>{'비공개'}</div>
+              <div className={selectedStudyPublicCheckCategory === '전체' ? 'main-bottom-box-studyroom-public-check-category-button-selected' : 'main-bottom-box-studyroom-public-check-category-button'}
+                onClick={() => onStudyPublicCheckCategoryButtonClickHandler('전체')}>{'전체'}</div>
+              <div className={selectedStudyPublicCheckCategory === '공개' ? 'main-bottom-box-studyroom-public-check-category-button-selected' : 'main-bottom-box-studyroom-public-check-category-button'}
+                onClick={() => onStudyPublicCheckCategoryButtonClickHandler('공개')}>{'공개'}</div>
+              <div className={selectedStudyPublicCheckCategory === '비공개' ? 'main-bottom-box-studyroom-public-check-category-button-selected' : 'main-bottom-box-studyroom-public-check-category-button'}
+                onClick={() => onStudyPublicCheckCategoryButtonClickHandler('비공개')}>{'비공개'}</div>
+              {/* <div className='main-bottom-box-studyroom-public-check-category-button'>{'공개'}</div>
+              <div className='main-bottom-box-studyroom-public-check-category-button'>{'비공개'}</div> */}
             </div>
 
             <div className='main-bottom-box-studyroom'>
