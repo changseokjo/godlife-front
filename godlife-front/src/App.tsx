@@ -12,7 +12,6 @@ function App() {
   //    state: 현재 페이지 url 상태   //
   const { pathname } = useLocation();
 
-
   return (
     <div>
       {<Header />}

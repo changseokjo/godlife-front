@@ -1,8 +1,7 @@
-export default interface SearchStudyRoomItem {
+export default interface RecommendationStudyRoomItem {
   studyNumber: number;
   studyName: string;
   studyEndDate: string;
-  studyDisclosureStatus: string;
   studyPersonnel: string;
   studyCoverImageUrl: string | null;
 }
