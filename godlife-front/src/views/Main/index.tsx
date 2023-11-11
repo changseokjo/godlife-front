@@ -1,4 +1,4 @@
-import React, { ChangeEvent, KeyboardEvent, useState, useEffect } from 'react'
+import React, { ChangeEvent, KeyboardEvent, useState, useEffect, useRef } from 'react'
 import { Scrollbars } from 'react-custom-scrollbars-2';
 import 'react-tabs/style/react-tabs.css';
 import './style.css';
@@ -13,8 +13,13 @@ import MyToDoListInputBox from '../../components/MyToDoListInputBox';
 import SearchInputBox from '../../components/SearchInputBox';
 import SearchStudyListItem from '../../components/SearchStudyListItem';
 
+interface MainProps {
+  cursorStatus: boolean;
+  setCursorStatus: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 //        component: 메인 페이지        //
-export default function Main() {
+export default function Main({ cursorStatus, setCursorStatus }: MainProps) {
 
   //        state: 조회하는 유저 이메일 path variable 상태        //
   const { searchEmail } = useParams();
@@ -346,7 +351,7 @@ export default function Main() {
     const [searchStudyList, setSearchStudyList] = useState<SearchStudyRoomItem[]>([]);
     //        state: 총 스터디 개수 상태        //
     const [totalStudySum, setTotalStudySum] = useState<number>(0);
-
+    //        state: 검색 후 스터디 방 보여지는 개수 상태       //
     const [visibleItems, setVisibleItems] = useState(15);
 
     //        effect: 컴포넌트 마운트 시 스터디 리스트 불러오기       //
@@ -389,8 +394,17 @@ export default function Main() {
 
     //        event handler: 더보기 버튼 클릭 이벤트 처리       //
     const onMoreDetailButtonClickHandler = () => {
-      alert('더보기 버튼 처리');
+      setVisibleItems(visibleItems + 15)
     }
+
+    const searchButtonRef = useRef<HTMLInputElement | null>(null); // Ref 생성
+
+    useEffect(() => {
+      if (searchButtonRef.current) {
+        searchButtonRef.current.focus();
+        setCursorStatus(false);
+      }
+    }, [cursorStatus]);
 
     //        render: 메인 하단 컴포넌트 렌더링       //
     return (
@@ -400,7 +414,7 @@ export default function Main() {
           <div className='main-bottom-box-studyroom-search'>
             <div className='main-bottom-box-studyroom-search-box'>
               <div className='main-bottom-box-studyroom-total'>{`총 ${totalStudySum}개 스터디`}</div>
-              <SearchInputBox type={'text'} placeholder='검색어를 입력해 주세요' value={searchValue} icon={'search-icon'} 
+              <SearchInputBox ref={searchButtonRef} type={'text'} placeholder='검색어를 입력해 주세요' value={searchValue} icon={'search-icon'} 
               onChange={onInputValueChangeHandler} onKeyDown={onSearchEnterKeyDownHandler} onButtonClick={onSearchButtonClickHandler}/>
             </div>
             <div className='main-bottom-box-studyroom-category-box'>
@@ -431,11 +445,9 @@ export default function Main() {
               <div className='main-bottom-box-studyroom-line'>
                 {searchStudyList.slice(0, visibleItems).map(SearchStudyRoomItem => <SearchStudyListItem searchStudyRoomItem={SearchStudyRoomItem} />)}
               </div>
-
               {searchStudyList.length > 15 && visibleItems < searchStudyList.length && (
-                <div className='main-bottom-box-studyroom-more-detail-button' onClick={() => setVisibleItems(visibleItems + 15)}>{'더보기'}</div>
+                <div className='main-bottom-box-studyroom-more-detail-button' onClick={onMoreDetailButtonClickHandler}>{'더보기'}</div>
               )}
-
             </div>
           </div>
         </div>
