@@ -1,13 +1,12 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import './style.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 interface HeaderProps {
-  cursorStatus: boolean;
-  setCursorStatus: React.Dispatch<React.SetStateAction<boolean>>;
+  onSearchMoveClickHandler: () => void
 }
 
-export default function Header({ cursorStatus, setCursorStatus }: HeaderProps) {
+export default function Header({ onSearchMoveClickHandler }: HeaderProps) {
 
   //        state: path name 상태       //
   const { pathname } = useLocation();
@@ -19,12 +18,7 @@ export default function Header({ cursorStatus, setCursorStatus }: HeaderProps) {
   const onLogoClickHandler = () => {
     navigator('/');
   }
-
-  //        event handler: 스터디 검색 버튼 이벤트 처리        //
-  const onStudySearchButtonClickHandler = () => {
-    setCursorStatus(!cursorStatus);
-  }
-
+  
   //        render: 헤더 컴포넌트 렌더링        //
   return (
     <div id='header'>
@@ -37,7 +31,7 @@ export default function Header({ cursorStatus, setCursorStatus }: HeaderProps) {
         </div>
 
         <div className='header-right-box'>
-          <div className='study-search-button' onClick={onStudySearchButtonClickHandler}>{'스터디 검색'}</div>
+          <div className='study-search-button' onClick={onSearchMoveClickHandler}>{'스터디 검색'}</div>
           <div className='study-create-button'>{'스터디 생성'}</div>
           <div className='study-mypage-button'>{'내 정보 관리'}</div>
         </div>

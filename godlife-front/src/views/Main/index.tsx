@@ -1,4 +1,4 @@
-import React, { ChangeEvent, KeyboardEvent, useState, useEffect, useRef } from 'react'
+import React, { ChangeEvent, KeyboardEvent, useState, useEffect, useRef, forwardRef } from 'react'
 import { Scrollbars } from 'react-custom-scrollbars-2';
 import 'react-tabs/style/react-tabs.css';
 import './style.css';
@@ -13,13 +13,8 @@ import MyToDoListInputBox from '../../components/MyToDoListInputBox';
 import SearchInputBox from '../../components/SearchInputBox';
 import SearchStudyListItem from '../../components/SearchStudyListItem';
 
-interface MainProps {
-  cursorStatus: boolean;
-  setCursorStatus: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
 //        component: 메인 페이지        //
-export default function Main({ cursorStatus, setCursorStatus }: MainProps) {
+const Main = forwardRef<HTMLDivElement>((props, ref) => {
 
   //        state: 조회하는 유저 이메일 path variable 상태        //
   const { searchEmail } = useParams();
@@ -312,8 +307,8 @@ export default function Main({ cursorStatus, setCursorStatus }: MainProps) {
               </div>
           </div>
       );
-  }
-
+    }
+    
   //        component: 메인 중단 컴포넌트       //
   const MainMiddle = () => {
 
@@ -341,6 +336,7 @@ export default function Main({ cursorStatus, setCursorStatus }: MainProps) {
 
   //        component: 메인 하단 컴포넌트       //
   const MainBottom = () => {
+
     //        state: 스터디 카테고리 선택 상태        //
     const [selectedStudyCategory, setSelectedStudyCategory] = useState<string>('전체');
     //        state: 스터디 공개여부 선택 상태        //
@@ -397,24 +393,15 @@ export default function Main({ cursorStatus, setCursorStatus }: MainProps) {
       setVisibleItems(visibleItems + 15)
     }
 
-    const searchButtonRef = useRef<HTMLInputElement | null>(null); // Ref 생성
-
-    useEffect(() => {
-      if (searchButtonRef.current) {
-        searchButtonRef.current.focus();
-        setCursorStatus(false);
-      }
-    }, [cursorStatus]);
-
     //        render: 메인 하단 컴포넌트 렌더링       //
     return (
-      <div id='main-bottom-wrapper'>
+      <div ref={ref} id='main-bottom-wrapper'>
         <div className='main-bottom-box'>
           <div className='main-bottom-box-studyroom-search-text'>{'스터디 검색'}</div>
           <div className='main-bottom-box-studyroom-search'>
             <div className='main-bottom-box-studyroom-search-box'>
               <div className='main-bottom-box-studyroom-total'>{`총 ${totalStudySum}개 스터디`}</div>
-              <SearchInputBox ref={searchButtonRef} type={'text'} placeholder='검색어를 입력해 주세요' value={searchValue} icon={'search-icon'} 
+              <SearchInputBox type={'text'} placeholder='검색어를 입력해 주세요' value={searchValue} icon={'search-icon'} 
               onChange={onInputValueChangeHandler} onKeyDown={onSearchEnterKeyDownHandler} onButtonClick={onSearchButtonClickHandler}/>
             </div>
             <div className='main-bottom-box-studyroom-category-box'>
@@ -463,4 +450,6 @@ export default function Main({ cursorStatus, setCursorStatus }: MainProps) {
       <MainBottom />
     </>
   )
-}
+});
+
+export default Main;
